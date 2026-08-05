@@ -5,6 +5,7 @@ import '../features/history/history_screen.dart';
 import '../features/log/log_screen.dart';
 import '../features/prs/prs_screen.dart';
 import '../features/settings/settings_screen.dart';
+import '../shared/theme/app_theme.dart';
 
 class PowerliftingTrackerApp extends StatelessWidget {
   const PowerliftingTrackerApp({super.key});
@@ -13,12 +14,8 @@ class PowerliftingTrackerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Powerlifting Tracker',
-      theme: ThemeData(colorSchemeSeed: Colors.deepOrange, useMaterial3: true),
-      darkTheme: ThemeData(
-        colorSchemeSeed: Colors.deepOrange,
-        brightness: Brightness.dark,
-        useMaterial3: true,
-      ),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
       home: const _RootShell(),
     );
   }
