@@ -21,6 +21,10 @@ class SetEntryTile extends StatelessWidget {
         entry.rpe != null ? AppColors.rpeColor(entry.rpe!) : theme.colorScheme.primary;
 
     return ListTile(
+      // The plate-color ramp is tuned to read as a swatch, not as freely
+      // placed text — a bordered bar keeps even the near-white low-RPE end
+      // visible against a light surface, the same way a real plate's rim
+      // stays visible regardless of how light the plate itself is.
       leading: SizedBox(
         width: 6,
         height: 40,
@@ -28,6 +32,9 @@ class SetEntryTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: accent,
             borderRadius: BorderRadius.circular(2),
+            border: Border.all(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.25),
+            ),
           ),
         ),
       ),
@@ -50,7 +57,7 @@ class SetEntryTile extends StatelessWidget {
             if (entry.rpe != null)
               TextSpan(
                 text: ' @${entry.rpe!.toStringAsFixed(1)}',
-                style: TextStyle(color: accent, fontWeight: FontWeight.w700),
+                style: const TextStyle(fontWeight: FontWeight.w700),
               ),
           ],
         ),
