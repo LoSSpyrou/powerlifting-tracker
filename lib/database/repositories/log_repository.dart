@@ -57,6 +57,26 @@ class LogRepository {
         );
   }
 
+  Stream<List<LoggedSet>> watchSetsForLift(int liftId) {
+    final query =
+        _db.select(_db.setEntries).join([
+            innerJoin(_db.lifts, _db.lifts.id.equalsExp(_db.setEntries.liftId)),
+          ])
+          ..where(_db.setEntries.liftId.equals(liftId))
+          ..orderBy([OrderingTerm.asc(_db.setEntries.createdAt)]);
+
+    return query.watch().map(
+      (rows) => rows
+          .map(
+            (row) => LoggedSet(
+              entry: row.readTable(_db.setEntries),
+              lift: row.readTable(_db.lifts),
+            ),
+          )
+          .toList(),
+    );
+  }
+
   Future<SetEntry?> lastSetForLift(int liftId) {
     return (_db.select(_db.setEntries)
           ..where((s) => s.liftId.equals(liftId))
