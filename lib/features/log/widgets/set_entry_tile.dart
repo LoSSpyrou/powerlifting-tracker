@@ -17,8 +17,9 @@ class SetEntryTile extends StatelessWidget {
     final theme = Theme.of(context);
     final entry = loggedSet.entry;
     final unit = entry.unit == WeightUnit.kg ? 'kg' : 'lb';
-    final accent =
-        entry.rpe != null ? AppColors.rpeColor(entry.rpe!) : theme.colorScheme.primary;
+    final accent = entry.rpe != null
+        ? AppColors.rpeColor(entry.rpe!)
+        : theme.colorScheme.primary;
 
     return ListTile(
       // The plate-color ramp is tuned to read as a swatch, not as freely
@@ -38,7 +39,10 @@ class SetEntryTile extends StatelessWidget {
           ),
         ),
       ),
-      title: Text(liftDisplayName(loggedSet.lift), style: theme.textTheme.bodyLarge),
+      title: Text(
+        liftDisplayName(loggedSet.lift),
+        style: theme.textTheme.bodyLarge,
+      ),
       subtitle: Text(TimeOfDay.fromDateTime(entry.createdAt).format(context)),
       trailing: Text.rich(
         TextSpan(

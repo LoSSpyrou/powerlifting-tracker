@@ -80,8 +80,9 @@ class AppTheme {
         backgroundColor: surfaceRaised,
         selectedColor: colorScheme.primary,
         labelStyle: textTheme.labelLarge,
-        secondaryLabelStyle:
-            textTheme.labelLarge?.copyWith(color: colorScheme.onPrimary),
+        secondaryLabelStyle: textTheme.labelLarge?.copyWith(
+          color: colorScheme.onPrimary,
+        ),
         shape: const RoundedRectangleBorder(borderRadius: radius),
         side: BorderSide.none,
       ),

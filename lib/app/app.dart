@@ -49,7 +49,10 @@ class _RootShellState extends State<_RootShell> {
         destinations: const [
           NavigationDestination(icon: Icon(Icons.edit_note), label: 'Log'),
           NavigationDestination(icon: Icon(Icons.show_chart), label: 'History'),
-          NavigationDestination(icon: Icon(Icons.calculate), label: 'Calculators'),
+          NavigationDestination(
+            icon: Icon(Icons.calculate),
+            label: 'Calculators',
+          ),
           NavigationDestination(icon: Icon(Icons.emoji_events), label: 'PRs'),
           NavigationDestination(icon: Icon(Icons.settings), label: 'Settings'),
         ],

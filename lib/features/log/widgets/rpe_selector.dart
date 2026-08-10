@@ -42,10 +42,9 @@ class RpeSelector extends StatelessWidget {
               final selected = value == rpe;
               final color = AppColors.rpeColor(rpe);
               final textColor =
-                  ThemeData.estimateBrightnessForColor(color) ==
-                          Brightness.dark
-                      ? Colors.white
-                      : Colors.black;
+                  ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+                  ? Colors.white
+                  : Colors.black;
 
               return GestureDetector(
                 onTap: () => onChanged(rpe),

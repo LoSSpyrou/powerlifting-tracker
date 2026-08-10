@@ -24,7 +24,13 @@ class AppColors {
   static const plateBlue = Color(0xFF2F5D9E);
   static const plateRed = Color(0xFFC23B32);
 
-  static const _rpeRamp = [plateWhite, plateGreen, plateYellow, plateBlue, plateRed];
+  static const _rpeRamp = [
+    plateWhite,
+    plateGreen,
+    plateYellow,
+    plateBlue,
+    plateRed,
+  ];
 
   /// Interpolates the plate-color progression across the 1-10 RPE range.
   static Color rpeColor(double rpe) {

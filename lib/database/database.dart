@@ -18,11 +18,11 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        onCreate: (m) async {
-          await m.createAll();
-          await _seedDefaultLifts();
-        },
-      );
+    onCreate: (m) async {
+      await m.createAll();
+      await _seedDefaultLifts();
+    },
+  );
 
   Future<void> _seedDefaultLifts() async {
     await batch((b) {

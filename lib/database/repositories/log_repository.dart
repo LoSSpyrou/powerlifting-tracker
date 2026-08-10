@@ -12,26 +12,27 @@ class LogRepository {
   Stream<List<Lift>> watchLifts() => _db.select(_db.lifts).watch();
 
   Stream<List<LoggedSet>> watchTodaysSets() {
-    final query = _db.select(_db.setEntries).join([
-      innerJoin(_db.lifts, _db.lifts.id.equalsExp(_db.setEntries.liftId)),
-      innerJoin(
-        _db.sessions,
-        _db.sessions.id.equalsExp(_db.setEntries.sessionId),
-      ),
-    ])
-      ..where(_db.sessions.date.isBetweenValues(_startOfToday, _endOfToday))
-      ..orderBy([OrderingTerm.desc(_db.setEntries.createdAt)]);
+    final query =
+        _db.select(_db.setEntries).join([
+            innerJoin(_db.lifts, _db.lifts.id.equalsExp(_db.setEntries.liftId)),
+            innerJoin(
+              _db.sessions,
+              _db.sessions.id.equalsExp(_db.setEntries.sessionId),
+            ),
+          ])
+          ..where(_db.sessions.date.isBetweenValues(_startOfToday, _endOfToday))
+          ..orderBy([OrderingTerm.desc(_db.setEntries.createdAt)]);
 
     return query.watch().map(
-          (rows) => rows
-              .map(
-                (row) => LoggedSet(
-                  entry: row.readTable(_db.setEntries),
-                  lift: row.readTable(_db.lifts),
-                ),
-              )
-              .toList(),
-        );
+      (rows) => rows
+          .map(
+            (row) => LoggedSet(
+              entry: row.readTable(_db.setEntries),
+              lift: row.readTable(_db.lifts),
+            ),
+          )
+          .toList(),
+    );
   }
 
   Future<void> logSet({
@@ -42,7 +43,9 @@ class LogRepository {
     required WeightUnit unit,
   }) async {
     final session = await _todaysSession();
-    await _db.into(_db.setEntries).insert(
+    await _db
+        .into(_db.setEntries)
+        .insert(
           SetEntriesCompanion.insert(
             sessionId: session.id,
             liftId: liftId,
@@ -63,9 +66,11 @@ class LogRepository {
   }
 
   Future<Session> _todaysSession() async {
-    final existing = await (_db.select(_db.sessions)
-          ..where((s) => s.date.isBetweenValues(_startOfToday, _endOfToday)))
-        .getSingleOrNull();
+    final existing =
+        await (_db.select(
+              _db.sessions,
+            )..where((s) => s.date.isBetweenValues(_startOfToday, _endOfToday)))
+            .getSingleOrNull();
     if (existing != null) return existing;
 
     final id = await _db

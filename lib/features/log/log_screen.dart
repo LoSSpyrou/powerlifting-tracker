@@ -36,8 +36,7 @@ class _LogScreenState extends ConsumerState<LogScreen> {
   }
 
   Future<void> _applyLastSetDefaults(int liftId) async {
-    final last =
-        await ref.read(logRepositoryProvider).lastSetForLift(liftId);
+    final last = await ref.read(logRepositoryProvider).lastSetForLift(liftId);
     if (!mounted || last == null) return;
     setState(() {
       _weightController.text = formatWeight(last.weight);
@@ -66,7 +65,9 @@ class _LogScreenState extends ConsumerState<LogScreen> {
 
     setState(() => _submitting = true);
     try {
-      await ref.read(logRepositoryProvider).logSet(
+      await ref
+          .read(logRepositoryProvider)
+          .logSet(
             liftId: liftId,
             weight: weight,
             reps: reps,
@@ -93,8 +94,7 @@ class _LogScreenState extends ConsumerState<LogScreen> {
       appBar: AppBar(title: const Text('Log')),
       body: liftsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) =>
-            Center(child: Text('Error loading lifts: $error')),
+        error: (error, _) => Center(child: Text('Error loading lifts: $error')),
         data: (lifts) {
           if (lifts.isEmpty) {
             return const Center(child: Text('No lifts available'));
@@ -131,8 +131,10 @@ class _LogScreenState extends ConsumerState<LogScreen> {
                               decoration: const InputDecoration(
                                 labelText: 'Weight (kg)',
                               ),
-                              keyboardType: const TextInputType
-                                  .numberWithOptions(decimal: true),
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                    decimal: true,
+                                  ),
                               validator: (value) {
                                 final parsed = double.tryParse(value ?? '');
                                 if (parsed == null || parsed <= 0) {
@@ -147,8 +149,9 @@ class _LogScreenState extends ConsumerState<LogScreen> {
                             child: TextFormField(
                               controller: _repsController,
                               style: numericStyle,
-                              decoration:
-                                  const InputDecoration(labelText: 'Reps'),
+                              decoration: const InputDecoration(
+                                labelText: 'Reps',
+                              ),
                               keyboardType: TextInputType.number,
                               validator: (value) {
                                 final parsed = int.tryParse(value ?? '');
