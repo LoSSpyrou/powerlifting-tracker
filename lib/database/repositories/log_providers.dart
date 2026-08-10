@@ -11,3 +11,10 @@ final liftsProvider = StreamProvider<List<Lift>>((ref) {
 final todaysSetsProvider = StreamProvider<List<LoggedSet>>((ref) {
   return ref.watch(logRepositoryProvider).watchTodaysSets();
 });
+
+final setsForLiftProvider = StreamProvider.family<List<LoggedSet>, int>((
+  ref,
+  liftId,
+) {
+  return ref.watch(logRepositoryProvider).watchSetsForLift(liftId);
+});
