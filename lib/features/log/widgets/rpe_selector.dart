@@ -7,12 +7,25 @@ import '../../../shared/theme/app_typography.dart';
 /// used for competition plates — low effort reads as a light plate color,
 /// max effort reads as red.
 class RpeSelector extends StatelessWidget {
-  const RpeSelector({super.key, required this.value, required this.onChanged});
+  const RpeSelector({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.minRpe = 1.0,
+  });
 
   final double? value;
   final ValueChanged<double?> onChanged;
 
-  static final List<double> _values = [for (int i = 2; i <= 20; i++) i / 2];
+  /// Lowest RPE offered -- callers whose downstream calculation only
+  /// covers part of the scale (e.g. the 1RM chart, which starts at 6.0)
+  /// can raise this so they never offer a value that just dead-ends.
+  final double minRpe;
+
+  List<double> get _values => [
+    for (int i = 2; i <= 20; i++)
+      if (i / 2 >= minRpe) i / 2,
+  ];
 
   @override
   Widget build(BuildContext context) {
