@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/one_rep_max_tab.dart';
+import 'widgets/plate_loader_tab.dart';
+import 'widgets/wilks_dots_tab.dart';
+
 class CalculatorsScreen extends StatelessWidget {
   const CalculatorsScreen({super.key});
 
@@ -19,11 +23,7 @@ class CalculatorsScreen extends StatelessWidget {
           ),
         ),
         body: const TabBarView(
-          children: [
-            Center(child: Text('Plate loading calculator goes here')),
-            Center(child: Text('1RM estimator goes here')),
-            Center(child: Text('Wilks/DOTS calculator goes here')),
-          ],
+          children: [PlateLoaderTab(), OneRepMaxTab(), WilksDotsTab()],
         ),
       ),
     );
