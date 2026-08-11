@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/app_preview.dart';
+
 class PrsScreen extends StatelessWidget {
+  @AppPreview(name: 'PRs Screen')
   const PrsScreen({super.key});
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/app_preview.dart';
 import '../../../../core/theme/app_colors.dart';
 
 /// Draws a loaded barbell, front-on: sleeve, plates heaviest-innermost
@@ -103,4 +104,9 @@ class PlateBarVisual extends StatelessWidget {
       ),
     );
   }
+}
+
+@AppPreview(name: 'Plate Bar Visual')
+Widget plateBarVisualPreview() {
+  return const PlateBarVisual(perSidePlates: [25, 20, 5, 1.25]);
 }

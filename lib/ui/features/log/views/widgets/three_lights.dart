@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/app_preview.dart';
 import '../../../../core/theme/app_colors.dart';
 
 /// The judges' decision panel from a powerlifting meet: three white lights
@@ -83,4 +84,9 @@ class _ThreeLightsState extends State<ThreeLights>
       },
     );
   }
+}
+
+@AppPreview(name: 'Three Lights')
+Widget threeLightsPreview() {
+  return const ThreeLights(trigger: 1);
 }

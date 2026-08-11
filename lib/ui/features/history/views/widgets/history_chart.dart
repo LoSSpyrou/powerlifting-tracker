@@ -1,8 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../data/services/database.dart';
 import '../../../../../domain/models/format_weight.dart';
+import '../../../../../domain/models/lift_type.dart';
 import '../../../../../domain/models/logged_set.dart';
+import '../../../../core/app_preview.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -228,4 +231,28 @@ class HistoryChart extends StatelessWidget {
       ),
     );
   }
+}
+
+@AppPreview(name: 'History Chart')
+Widget historyChartPreview() {
+  const lift = Lift(id: 1, type: LiftType.squat);
+  final now = DateTime.now();
+  return HistoryChart(
+    sets: [
+      for (var i = 0; i < 6; i++)
+        LoggedSet(
+          lift: lift,
+          entry: SetEntry(
+            id: i,
+            sessionId: i,
+            liftId: 1,
+            weight: 120 + i * 5,
+            reps: 5,
+            rpe: 6.5 + i * 0.5,
+            unit: WeightUnit.kg,
+            createdAt: now.subtract(Duration(days: (6 - i) * 7)),
+          ),
+        ),
+    ],
+  );
 }

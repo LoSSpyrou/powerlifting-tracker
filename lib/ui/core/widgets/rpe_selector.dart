@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../app_preview.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_typography.dart';
 
@@ -99,4 +100,9 @@ class RpeSelector extends StatelessWidget {
       ],
     );
   }
+}
+
+@AppPreview(name: 'RPE Selector')
+Widget rpeSelectorPreview() {
+  return RpeSelector(value: 8.0, onChanged: (_) {});
 }

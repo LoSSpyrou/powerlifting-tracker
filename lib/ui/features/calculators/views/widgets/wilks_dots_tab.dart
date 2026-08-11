@@ -3,9 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../domain/models/sex.dart';
 import '../../../../../domain/use_cases/calculators/wilks_dots_math.dart';
+import '../../../../core/app_preview.dart';
 import '../../../../core/theme/app_typography.dart';
 
 class WilksDotsTab extends StatefulWidget {
+  @AppPreview(name: 'Wilks/DOTS Calculator')
   const WilksDotsTab({super.key});
 
   @override

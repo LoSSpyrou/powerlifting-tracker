@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../../../domain/models/format_weight.dart';
 import '../../../../../domain/use_cases/calculators/one_rep_max_table.dart';
 import '../../../../../domain/use_cases/calculators/plate_math.dart';
+import '../../../../core/app_preview.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/rpe_selector.dart';
 
 class OneRepMaxTab extends StatefulWidget {
+  @AppPreview(name: '1RM Calculator')
   const OneRepMaxTab({super.key});
 
   @override

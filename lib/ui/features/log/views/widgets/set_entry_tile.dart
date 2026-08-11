@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../data/services/database.dart';
 import '../../../../../domain/models/format_weight.dart';
 import '../../../../../domain/models/lift_display_name.dart';
 import '../../../../../domain/models/lift_type.dart';
 import '../../../../../domain/models/logged_set.dart';
+import '../../../../core/app_preview.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -68,4 +70,23 @@ class SetEntryTile extends StatelessWidget {
       ),
     );
   }
+}
+
+@AppPreview(name: 'Set Entry Tile')
+Widget setEntryTilePreview() {
+  return SetEntryTile(
+    loggedSet: LoggedSet(
+      lift: const Lift(id: 1, type: LiftType.squat),
+      entry: SetEntry(
+        id: 1,
+        sessionId: 1,
+        liftId: 1,
+        weight: 140,
+        reps: 5,
+        rpe: 8.5,
+        unit: WeightUnit.kg,
+        createdAt: DateTime.now(),
+      ),
+    ),
+  );
 }

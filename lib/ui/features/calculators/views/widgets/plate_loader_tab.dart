@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../domain/models/format_weight.dart';
 import '../../../../../domain/use_cases/calculators/plate_math.dart';
+import '../../../../core/app_preview.dart';
 import '../../../../core/theme/app_typography.dart';
 import 'plate_bar_visual.dart';
 
@@ -27,6 +28,7 @@ class _MaxValueFormatter extends TextInputFormatter {
 }
 
 class PlateLoaderTab extends StatefulWidget {
+  @AppPreview(name: 'Plate Loader')
   const PlateLoaderTab({super.key});
 
   @override

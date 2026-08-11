@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../data/services/database.dart';
 import '../../../../../domain/models/format_weight.dart';
 import '../../../../../domain/models/lift_type.dart';
 import '../../../../../domain/models/logged_set.dart';
+import '../../../../core/app_preview.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -65,4 +67,23 @@ class HistorySetRow extends StatelessWidget {
       ),
     );
   }
+}
+
+@AppPreview(name: 'History Set Row')
+Widget historySetRowPreview() {
+  return HistorySetRow(
+    loggedSet: LoggedSet(
+      lift: const Lift(id: 1, type: LiftType.bench),
+      entry: SetEntry(
+        id: 1,
+        sessionId: 1,
+        liftId: 1,
+        weight: 100,
+        reps: 3,
+        rpe: 9,
+        unit: WeightUnit.kg,
+        createdAt: DateTime.now(),
+      ),
+    ),
+  );
 }
