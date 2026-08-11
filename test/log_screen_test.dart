@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:powerlifting_tracker/database/database.dart';
-import 'package:powerlifting_tracker/database/database_provider.dart';
-import 'package:powerlifting_tracker/features/log/log_screen.dart';
+import 'package:powerlifting_tracker/data/services/database.dart';
+import 'package:powerlifting_tracker/data/services/database_provider.dart';
+import 'package:powerlifting_tracker/ui/features/log/views/log_screen.dart';
 
 void main() {
   testWidgets('logging a set adds it to the today list', (tester) async {

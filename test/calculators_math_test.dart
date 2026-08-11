@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:powerlifting_tracker/features/calculators/one_rep_max_table.dart';
-import 'package:powerlifting_tracker/features/calculators/plate_math.dart';
-import 'package:powerlifting_tracker/features/calculators/wilks_dots_math.dart';
-import 'package:powerlifting_tracker/shared/models/sex.dart';
+import 'package:powerlifting_tracker/domain/models/sex.dart';
+import 'package:powerlifting_tracker/domain/use_cases/calculators/one_rep_max_table.dart';
+import 'package:powerlifting_tracker/domain/use_cases/calculators/plate_math.dart';
+import 'package:powerlifting_tracker/domain/use_cases/calculators/wilks_dots_math.dart';
 
 void main() {
   group('roundToLoadable', () {

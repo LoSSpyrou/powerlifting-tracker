@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:powerlifting_tracker/app/app.dart';
+import 'package:powerlifting_tracker/ui/app.dart';
 
 void main() {
   testWidgets('App launches to the Log screen', (WidgetTester tester) async {
