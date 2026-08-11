@@ -6,6 +6,7 @@ import '../../../../domain/models/format_weight.dart';
 import '../../../../domain/models/lift_type.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/widgets/lift_selector.dart';
+import '../../../core/widgets/responsive_content.dart';
 import '../../../core/widgets/rpe_selector.dart';
 import '../view_models/log_view_models.dart';
 import 'widgets/set_entry_tile.dart';
@@ -107,139 +108,141 @@ class _LogScreenState extends ConsumerState<LogScreen> {
             );
           }
 
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      LiftSelector(
-                        lifts: lifts,
-                        selectedLiftId: _selectedLiftId,
-                        onSelected: _onLiftSelected,
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _weightController,
-                              style: numericStyle,
-                              decoration: const InputDecoration(
-                                labelText: 'Weight (kg)',
-                              ),
-                              keyboardType:
-                                  const TextInputType.numberWithOptions(
-                                    decimal: true,
-                                  ),
-                              validator: (value) {
-                                final parsed = double.tryParse(value ?? '');
-                                if (parsed == null || parsed <= 0) {
-                                  return 'Enter a weight';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: TextFormField(
-                              controller: _repsController,
-                              style: numericStyle,
-                              decoration: const InputDecoration(
-                                labelText: 'Reps',
-                              ),
-                              keyboardType: TextInputType.number,
-                              validator: (value) {
-                                final parsed = int.tryParse(value ?? '');
-                                if (parsed == null || parsed <= 0) {
-                                  return 'Enter reps';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      RpeSelector(
-                        value: _selectedRpe,
-                        onChanged: (value) =>
-                            setState(() => _selectedRpe = value),
-                      ),
-                      const SizedBox(height: 16),
-                      FilledButton(
-                        onPressed: _submitting ? null : _submit,
-                        child: _submitting
-                            ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
+          return ResponsiveContent(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        LiftSelector(
+                          lifts: lifts,
+                          selectedLiftId: _selectedLiftId,
+                          onSelected: _onLiftSelected,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _weightController,
+                                style: numericStyle,
+                                decoration: const InputDecoration(
+                                  labelText: 'Weight (kg)',
                                 ),
-                              )
-                            : const Text('Log Set'),
-                      ),
-                      const SizedBox(height: 8),
-                      ThreeLights(trigger: _lightsTrigger),
-                    ],
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                      decimal: true,
+                                    ),
+                                validator: (value) {
+                                  final parsed = double.tryParse(value ?? '');
+                                  if (parsed == null || parsed <= 0) {
+                                    return 'Enter a weight';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: TextFormField(
+                                controller: _repsController,
+                                style: numericStyle,
+                                decoration: const InputDecoration(
+                                  labelText: 'Reps',
+                                ),
+                                keyboardType: TextInputType.number,
+                                validator: (value) {
+                                  final parsed = int.tryParse(value ?? '');
+                                  if (parsed == null || parsed <= 0) {
+                                    return 'Enter reps';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        RpeSelector(
+                          value: _selectedRpe,
+                          onChanged: (value) =>
+                              setState(() => _selectedRpe = value),
+                        ),
+                        const SizedBox(height: 16),
+                        FilledButton(
+                          onPressed: _submitting ? null : _submit,
+                          child: _submitting
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : const Text('Log Set'),
+                        ),
+                        const SizedBox(height: 8),
+                        ThreeLights(trigger: _lightsTrigger),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const Divider(height: 1),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-                child: todaysSetsAsync.when(
-                  loading: () => const SizedBox.shrink(),
-                  error: (error, _) => const SizedBox.shrink(),
-                  data: (sets) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "TODAY'S SETS",
-                        style: theme.textTheme.labelLarge?.copyWith(
-                          letterSpacing: 1,
-                          color: theme.colorScheme.onSurface.withValues(
-                            alpha: 0.6,
+                const Divider(height: 1),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+                  child: todaysSetsAsync.when(
+                    loading: () => const SizedBox.shrink(),
+                    error: (error, _) => const SizedBox.shrink(),
+                    data: (sets) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "TODAY'S SETS",
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            letterSpacing: 1,
+                            color: theme.colorScheme.onSurface.withValues(
+                              alpha: 0.6,
+                            ),
                           ),
                         ),
-                      ),
-                      Text(
-                        '${sets.length}',
-                        style: AppTypography.numeric(
-                          fontSize: 14,
-                          color: theme.colorScheme.onSurface.withValues(
-                            alpha: 0.6,
+                        Text(
+                          '${sets.length}',
+                          style: AppTypography.numeric(
+                            fontSize: 14,
+                            color: theme.colorScheme.onSurface.withValues(
+                              alpha: 0.6,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: todaysSetsAsync.when(
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  error: (error, _) => Center(child: Text('Error: $error')),
-                  data: (sets) {
-                    if (sets.isEmpty) {
-                      return const Center(
-                        child: Text('No sets logged today yet'),
+                Expanded(
+                  child: todaysSetsAsync.when(
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (error, _) => Center(child: Text('Error: $error')),
+                    data: (sets) {
+                      if (sets.isEmpty) {
+                        return const Center(
+                          child: Text('No sets logged today yet'),
+                        );
+                      }
+                      return ListView.builder(
+                        itemCount: sets.length,
+                        itemBuilder: (context, index) =>
+                            SetEntryTile(loggedSet: sets[index]),
                       );
-                    }
-                    return ListView.builder(
-                      itemCount: sets.length,
-                      itemBuilder: (context, index) =>
-                          SetEntryTile(loggedSet: sets[index]),
-                    );
-                  },
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

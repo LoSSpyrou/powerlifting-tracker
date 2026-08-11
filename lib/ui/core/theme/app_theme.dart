@@ -90,6 +90,10 @@ class AppTheme {
         backgroundColor: surfaceRaised,
         indicatorColor: colorScheme.primary.withValues(alpha: 0.25),
       ),
+      navigationRailTheme: NavigationRailThemeData(
+        backgroundColor: surfaceRaised,
+        indicatorColor: colorScheme.primary.withValues(alpha: 0.25),
+      ),
       dividerTheme: DividerThemeData(
         color: colorScheme.onSurface.withValues(alpha: 0.08),
       ),
