@@ -12,10 +12,10 @@ import sys
 from pathlib import Path
 
 SANCTIONED_EXCEPTIONS = {
-    "lib/features/log/widgets/rpe_selector.dart",
-    "lib/features/log/widgets/three_lights.dart",
+    "lib/ui/core/widgets/rpe_selector.dart",
+    "lib/ui/features/log/views/widgets/three_lights.dart",
 }
-THEME_DIR = "lib/shared/theme/"
+THEME_DIR = "lib/ui/core/theme/"
 COLOR_PATTERN = re.compile(r"\bColors\.\w+")
 HEX_PATTERN = re.compile(r"0x[0-9A-Fa-f]{6,8}\b")
 

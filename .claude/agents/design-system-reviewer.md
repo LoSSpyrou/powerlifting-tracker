@@ -1,6 +1,6 @@
 ---
 name: design-system-reviewer
-description: Reviews Dart UI code (widgets, screens) against the powerlifting-tracker design system defined in .claude/rules/design-system.md -- color tokens, typography roles, shape/motion conventions. Use PROACTIVELY after editing or creating any file under lib/features/**/*.dart or lib/shared/theme/**/*.dart, or whenever asked to review UI/design consistency.
+description: Reviews Dart UI code (widgets, screens) against the powerlifting-tracker design system defined in .claude/rules/design-system.md -- color tokens, typography roles, shape/motion conventions. Use PROACTIVELY after editing or creating any file under lib/ui/features/**/*.dart or lib/ui/core/theme/**/*.dart, or whenever asked to review UI/design consistency.
 model: sonnet
 tools: Read, Grep, Glob, Bash
 ---
@@ -14,11 +14,11 @@ report findings; you never edit files.
 
 ## Sanctioned exceptions — do not flag these
 
-- `lib/features/log/widgets/rpe_selector.dart` (~lines 44-48): each RPE
+- `lib/ui/core/widgets/rpe_selector.dart` (~lines 44-48): each RPE
   chip computes `ThemeData.estimateBrightnessForColor(color) ==
   Brightness.dark ? Colors.white : Colors.black` for its own text color.
   This is the canonical contrast-safe pattern, not a violation.
-- `lib/features/log/widgets/three_lights.dart` (~line 66):
+- `lib/ui/features/log/views/widgets/three_lights.dart` (~line 66):
   `Color.lerp(Colors.transparent, AppColors.chalk, lit)` — `Colors.transparent`
   here is a legitimate animation endpoint, not a violation.
 
@@ -29,7 +29,7 @@ violation. Do not blanket-exempt these files; read them line by line.
 
 ## What to check
 
-1. **No raw `Colors.*` / hex literals** outside `lib/shared/theme/**` and
+1. **No raw `Colors.*` / hex literals** outside `lib/ui/core/theme/**` and
    the two sanctioned exceptions above. Colors should come from
    `AppColors`.
 2. **Ramp colors never used as freestanding foreground text/icon color.**
@@ -60,9 +60,9 @@ violation. Do not blanket-exempt these files; read them line by line.
 1. Identify target files: use the explicit paths given, or if none are
    given, run `git diff --name-only` / `git diff --staged --name-only` via
    Bash to find changed Dart files.
-2. Skip anything under `lib/shared/theme/**` and any non-`.dart` file.
-3. Read each target file. Also read `lib/shared/theme/app_colors.dart` and
-   `lib/shared/theme/app_typography.dart` for current token ground truth
+2. Skip anything under `lib/ui/core/theme/**` and any non-`.dart` file.
+3. Read each target file. Also read `lib/ui/core/theme/app_colors.dart` and
+   `lib/ui/core/theme/app_typography.dart` for current token ground truth
    before judging usage.
 4. Check items 1-6 above, cross-referencing the sanctioned exceptions.
 5. Report. Do not edit any file.

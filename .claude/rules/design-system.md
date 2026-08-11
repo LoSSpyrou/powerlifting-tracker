@@ -22,7 +22,7 @@ directly from IPF-calibrated competition plate colors rather than a generic
 single-brand accent. Every color choice should trace back to something a
 powerlifter would actually recognize from a meet or a gym floor.
 
-Full system lives in `lib/shared/theme/`:
+Full system lives in `lib/ui/core/theme/`:
 `app_colors.dart`, `app_typography.dart`, `app_theme.dart`.
 
 ## Color system
@@ -71,7 +71,8 @@ Not fully square (that reads as the "broadsheet/hairline" AI-default), not
 pill-shaped (too soft for the equipment identity).
 
 Motion is spent in exactly one place per interaction, not scattered.
-The existing example: `ThreeLights` (`features/log/widgets/three_lights.dart`)
+The existing example: `ThreeLights`
+(`ui/features/log/views/widgets/three_lights.dart`)
 — the judges' three-light call from competition (white lights = good lift),
 flashed once as confirmation when a set logs successfully. If a new screen
 wants a moment of motion, it should be similarly literal — tied to something
@@ -95,7 +96,7 @@ placeholders. When building them out:
 ## Verification loop
 
 - Run `/verify` before committing UI changes (analyze, test, format).
-- For anything touching `lib/features/**` or introducing new colors or
+- For anything touching `lib/ui/features/**` or introducing new colors or
   animations, consider invoking the `design-system-reviewer` subagent to
   check the change against this doc.
 - A PostToolUse hook (`.claude/hooks/scripts/design_lint.py`) also prints
