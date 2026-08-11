@@ -78,9 +78,14 @@ class LogRepository {
   }
 
   Future<SetEntry?> lastSetForLift(int liftId) {
+    // Ties on createdAt (two sets logged within the same clock tick) break
+    // on id, since that's still monotonic with insertion order.
     return (_db.select(_db.setEntries)
           ..where((s) => s.liftId.equals(liftId))
-          ..orderBy([(s) => OrderingTerm.desc(s.createdAt)])
+          ..orderBy([
+            (s) => OrderingTerm.desc(s.createdAt),
+            (s) => OrderingTerm.desc(s.id),
+          ])
           ..limit(1))
         .getSingleOrNull();
   }
